@@ -2,52 +2,52 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IstoEuQuero 🎁</title>
-  <link rel="stylesheet" href="style.css">
+  <title>🎁 Minha Lista de Desejos</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 30px; }
+    input, button { margin: 5px 0; padding: 8px; width: 300px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    .block { margin-bottom: 20px; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>IstoEuQuero 🎁</h1>
-    <p>Monte e compartilhe sua lista de desejos</p>
-  </header>
+  <h1>🎁 Minha Lista de Desejos</h1>
 
-  <main>
-    <section id="createUser">
-      <h2>1. Criar Usuário</h2>
-      <input type="text" id="userName" placeholder="Nome">
-      <input type="email" id="userEmail" placeholder="Email">
-      <button onclick="createUser()">Criar</button>
-      <pre id="userResult"></pre>
-    </section>
+  <!-- Criar usuário -->
+  <div class="block">
+    <h2>1. Criar Usuário</h2>
+    <input id="userName" placeholder="Nome" /><br />
+    <input id="userEmail" placeholder="Email" /><br />
+    <button onclick="createUser()">Criar Usuário</button>
+    <pre id="userResult"></pre>
+  </div>
 
-    <section id="createWishlist">
-      <h2>2. Criar Lista</h2>
-      <input type="text" id="wishlistTitle" placeholder="Título">
-      <input type="text" id="wishlistDesc" placeholder="Descrição">
-      <input type="date" id="wishlistDate">
-      <button onclick="createWishlist()">Criar</button>
-      <pre id="wishlistResult"></pre>
-    </section>
+  <!-- Criar lista -->
+  <div class="block">
+    <h2>2. Criar Lista</h2>
+    <input id="wishlistTitle" placeholder="Título da Lista" /><br />
+    <input id="wishlistDesc" placeholder="Descrição" /><br />
+    <input id="wishlistDate" type="date" /><br />
+    <button onclick="createWishlist()">Criar Lista</button>
+    <pre id="wishlistResult"></pre>
+  </div>
 
-    <section id="addItem">
-      <h2>3. Adicionar Item</h2>
-      <input type="text" id="itemName" placeholder="Nome do item">
-      <input type="url" id="itemUrl" placeholder="URL do item">
-      <button onclick="addItem()">Adicionar</button>
-      <pre id="itemResult"></pre>
-    </section>
+  <!-- Adicionar item -->
+  <div class="block">
+    <h2>3. Adicionar Item</h2>
+    <input id="itemName" placeholder="Nome do Item" /><br />
+    <input id="itemUrl" placeholder="URL do Item" /><br />
+    <button onclick="addItem()">Adicionar Item</button>
+    <pre id="itemResult"></pre>
+  </div>
 
-    <section id="listWishlist">
-      <h2>4. Ver Lista</h2>
-      <button onclick="getWishlist()">Carregar Lista</button>
-      <pre id="listResult"></pre>
-    </section>
-  </main>
-
-  <footer>
-    <p>Feito com ❤️ para quem quer organizar presentes</p>
-  </footer>
+  <!-- Ver lista completa -->
+  <div class="block">
+    <h2>4. Ver Lista Completa</h2>
+    <button onclick="getWishlist()">Mostrar Lista</button>
+    <pre id="listResult"></pre>
+  </div>
 
   <script src="app.js"></script>
 </body>
