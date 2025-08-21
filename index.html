@@ -2,12 +2,53 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IstoEuQuero 🎁</title>
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎁 IstoEuQuero</h1>
-  <button id="testApi">Testar API</button>
-  <pre id="output"></pre>
+  <header>
+    <h1>IstoEuQuero 🎁</h1>
+    <p>Monte e compartilhe sua lista de desejos</p>
+  </header>
+
+  <main>
+    <section id="createUser">
+      <h2>1. Criar Usuário</h2>
+      <input type="text" id="userName" placeholder="Nome">
+      <input type="email" id="userEmail" placeholder="Email">
+      <button onclick="createUser()">Criar</button>
+      <pre id="userResult"></pre>
+    </section>
+
+    <section id="createWishlist">
+      <h2>2. Criar Lista</h2>
+      <input type="text" id="wishlistTitle" placeholder="Título">
+      <input type="text" id="wishlistDesc" placeholder="Descrição">
+      <input type="date" id="wishlistDate">
+      <button onclick="createWishlist()">Criar</button>
+      <pre id="wishlistResult"></pre>
+    </section>
+
+    <section id="addItem">
+      <h2>3. Adicionar Item</h2>
+      <input type="text" id="itemName" placeholder="Nome do item">
+      <input type="url" id="itemUrl" placeholder="URL do item">
+      <button onclick="addItem()">Adicionar</button>
+      <pre id="itemResult"></pre>
+    </section>
+
+    <section id="listWishlist">
+      <h2>4. Ver Lista</h2>
+      <button onclick="getWishlist()">Carregar Lista</button>
+      <pre id="listResult"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Feito com ❤️ para quem quer organizar presentes</p>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
