@@ -1,9 +1,9 @@
-const API_URL = "https://minhalista-backend.onrender.com"; // URL do backend no Render
+const API_URL = "https://minhalista-backend.onrender.com";
 
 let currentUserId = null;
 let currentWishlistId = null;
 
-// Helper para requisições com tratamento de erro
+// Helper para requisições
 async function doFetch(url, options = {}) {
   const res = await fetch(url, {
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },
@@ -31,7 +31,8 @@ async function createUser() {
     });
     document.getElementById("userResult").innerText = JSON.stringify(data, null, 2);
     currentUserId = data.id;
-    await loadUsers(); // recarrega combo de usuários
+    await loadUsers();
+    await loadUsersForList();
   } catch (err) {
     alert(`Erro: ${err.message}`);
   }
@@ -52,7 +53,7 @@ async function createWishlist() {
     });
     document.getElementById("wishlistResult").innerText = JSON.stringify(data, null, 2);
     currentWishlistId = data.id;
-    await loadWishlists(); // recarrega combo de listas
+    await loadWishlists();
   } catch (err) {
     alert(`Erro: ${err.message}`);
   }
@@ -87,7 +88,7 @@ async function getWishlist() {
   }
 }
 
-// Carregar todos os usuários no combo
+// Carregar usuários no combo de seleção de lista
 async function loadUsers() {
   try {
     const users = await doFetch(`${API_URL}/users`);
@@ -104,7 +105,37 @@ async function loadUsers() {
   }
 }
 
-// Carregar listas do usuário selecionado (com validação)
+// Carregar usuários no combo de criação de lista
+async function loadUsersForList() {
+  try {
+    const users = await doFetch(`${API_URL}/users`);
+    const userSelect = document.getElementById("userSelectForList");
+    userSelect.innerHTML = '<option value="">-- Selecione um usuário --</option>';
+    users.forEach(u => {
+      const opt = document.createElement("option");
+      opt.value = u.id;
+      opt.textContent = u.name;
+      userSelect.appendChild(opt);
+    });
+  } catch (err) {
+    console.error("Erro ao carregar usuários:", err.message);
+  }
+}
+
+// Definir usuário para criação de lista
+function setUserForList() {
+  const userId = document.getElementById("userSelectForList").value;
+  const btn = document.getElementById("createListBtn");
+  if (userId) {
+    currentUserId = userId;
+    btn.disabled = false;
+  } else {
+    currentUserId = null;
+    btn.disabled = true;
+  }
+}
+
+// Carregar listas do usuário selecionado
 async function loadWishlists() {
   const userId = document.getElementById("userSelect").value;
   const wishlistSelect = document.getElementById("wishlistSelect");
@@ -130,28 +161,4 @@ async function loadWishlists() {
       return;
     }
 
-    wishlistSelect.innerHTML = '<option value="">-- Selecione uma lista --</option>';
-    wishlists.forEach(w => {
-      const opt = document.createElement("option");
-      opt.value = w.id;
-      opt.textContent = w.title;
-      wishlistSelect.appendChild(opt);
-    });
-    addItemBtn.disabled = true; // só habilita quando escolher lista
-  } catch (err) {
-    console.error("Erro ao carregar listas:", err.message);
-  }
-}
-
-// Definir lista atual ao selecionar no combo
-function setCurrentWishlist() {
-  const wishlistId = document.getElementById("wishlistSelect").value;
-  const addItemBtn = document.querySelector('button[onclick="addItem()"]');
-  currentWishlistId = wishlistId || null;
-  addItemBtn.disabled = !currentWishlistId;
-}
-
-// Inicialização
-window.onload = () => {
-  loadUsers();
-};
+    wishlistSelect.innerHTML = '<option value="">
