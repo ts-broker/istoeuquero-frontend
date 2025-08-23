@@ -33,6 +33,20 @@
     <pre id="wishlistResult"></pre>
   </div>
 
+  <!-- Selecionar lista -->
+<div class="block">
+  <h2>Selecionar Lista para Adicionar Item</h2>
+  <label>Usuário:</label><br>
+  <select id="userSelect" onchange="loadWishlists()">
+    <option value="">-- Selecione um usuário --</option>
+  </select><br><br>
+
+  <label>Lista:</label><br>
+  <select id="wishlistSelect" onchange="setCurrentWishlist()">
+    <option value="">-- Selecione uma lista --</option>
+  </select>
+  
+</div>
   <!-- Adicionar item -->
   <div class="block">
     <h2>3. Adicionar Item</h2>
