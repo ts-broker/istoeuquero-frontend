@@ -51,6 +51,21 @@ async function addItem() {
   document.getElementById("itemResult").innerText = JSON.stringify(data, null, 2);
 }
 
+//salvar o ID retornado pelo backend
+async function getWishlist() {
+  try {
+    const data = await doFetch(`${API_URL}/wishlists/${currentWishlistId || prompt("Digite o ID da lista:")}`);
+    document.getElementById("listResult").innerText = JSON.stringify(data, null, 2);
+    
+    // Salva o ID da lista no estado para permitir adicionar itens
+    if (data.wishlist && data.wishlist.id) {
+      currentWishlistId = data.wishlist.id;
+    }
+  } catch (err) {
+    alert(`Erro: ${err.message}`);
+  }
+}
+
 // Ver lista completa
 async function getWishlist() {
   const res = await fetch(`${API_URL}/wishlists/${currentWishlistId}`);
