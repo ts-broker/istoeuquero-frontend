@@ -23,10 +23,15 @@
     <!-- Criar lista -->
     <section>
       <h2>2. Criar Lista</h2>
+      <label>Usuário:</label><br>
+      <select id="userSelectForList" onchange="setUserForList()">
+        <option value="">-- Selecione um usuário --</option>
+      </select><br><br>
+
       <input id="wishlistTitle" placeholder="Título da Lista" /><br />
       <input id="wishlistDesc" placeholder="Descrição" /><br />
       <input id="wishlistDate" type="date" /><br />
-      <button onclick="createWishlist()">Criar Lista</button>
+      <button id="createListBtn" onclick="createWishlist()" disabled>Criar Lista</button>
       <pre id="wishlistResult"></pre>
     </section>
 
