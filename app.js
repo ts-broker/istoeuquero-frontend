@@ -104,14 +104,32 @@ async function loadUsers() {
   }
 }
 
-// Carregar listas do usuário selecionado
+// Carregar listas do usuário selecionado (com validação)
 async function loadWishlists() {
   const userId = document.getElementById("userSelect").value;
-  if (!userId) return;
+  const wishlistSelect = document.getElementById("wishlistSelect");
+  const addItemBtn = document.querySelector('button[onclick="addItem()"]');
+
+  if (!userId) {
+    currentUserId = null;
+    wishlistSelect.innerHTML = '<option value="">-- Selecione um usuário primeiro --</option>';
+    currentWishlistId = null;
+    addItemBtn.disabled = true;
+    return;
+  }
+
   currentUserId = userId;
+
   try {
     const wishlists = await doFetch(`${API_URL}/users/${userId}/wishlists`);
-    const wishlistSelect = document.getElementById("wishlistSelect");
+
+    if (!wishlists || wishlists.length === 0) {
+      wishlistSelect.innerHTML = '<option value="">-- Nenhuma lista encontrada --</option>';
+      currentWishlistId = null;
+      addItemBtn.disabled = true;
+      return;
+    }
+
     wishlistSelect.innerHTML = '<option value="">-- Selecione uma lista --</option>';
     wishlists.forEach(w => {
       const opt = document.createElement("option");
@@ -119,6 +137,7 @@ async function loadWishlists() {
       opt.textContent = w.title;
       wishlistSelect.appendChild(opt);
     });
+    addItemBtn.disabled = true; // só habilita quando escolher lista
   } catch (err) {
     console.error("Erro ao carregar listas:", err.message);
   }
@@ -127,7 +146,9 @@ async function loadWishlists() {
 // Definir lista atual ao selecionar no combo
 function setCurrentWishlist() {
   const wishlistId = document.getElementById("wishlistSelect").value;
+  const addItemBtn = document.querySelector('button[onclick="addItem()"]');
   currentWishlistId = wishlistId || null;
+  addItemBtn.disabled = !currentWishlistId;
 }
 
 // Inicialização
