@@ -162,3 +162,8 @@ async function loadWishlists() {
     }
 
     wishlistSelect.innerHTML = '<option value="">
+
+window.onload = () => {
+  loadUsers();
+  loadUsersForList();
+};
