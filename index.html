@@ -3,65 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>🎁 Minha Lista de Desejos</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h2 { margin-top: 30px; }
-    input, button { margin: 5px 0; padding: 8px; width: 300px; }
-    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
-    .block { margin-bottom: 20px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎁 Minha Lista de Desejos</h1>
+  <header>
+    <h1>🎁 Minha Lista de Desejos</h1>
+  </header>
 
-  <!-- Criar usuário -->
-  <div class="block">
-    <h2>1. Criar Usuário</h2>
-    <input id="userName" placeholder="Nome" /><br />
-    <input id="userEmail" placeholder="Email" /><br />
-    <button onclick="createUser()">Criar Usuário</button>
-    <pre id="userResult"></pre>
-  </div>
+  <main>
+    <!-- Criar usuário -->
+    <section>
+      <h2>1. Criar Usuário</h2>
+      <input id="userName" placeholder="Nome" /><br />
+      <input id="userEmail" placeholder="Email" /><br />
+      <button onclick="createUser()">Criar Usuário</button>
+      <pre id="userResult"></pre>
+    </section>
 
-  <!-- Criar lista -->
-  <div class="block">
-    <h2>2. Criar Lista</h2>
-    <input id="wishlistTitle" placeholder="Título da Lista" /><br />
-    <input id="wishlistDesc" placeholder="Descrição" /><br />
-    <input id="wishlistDate" type="date" /><br />
-    <button onclick="createWishlist()">Criar Lista</button>
-    <pre id="wishlistResult"></pre>
-  </div>
+    <!-- Criar lista -->
+    <section>
+      <h2>2. Criar Lista</h2>
+      <input id="wishlistTitle" placeholder="Título da Lista" /><br />
+      <input id="wishlistDesc" placeholder="Descrição" /><br />
+      <input id="wishlistDate" type="date" /><br />
+      <button onclick="createWishlist()">Criar Lista</button>
+      <pre id="wishlistResult"></pre>
+    </section>
 
-  <!-- Selecionar lista -->
-<div class="block">
-  <h2>Selecionar Lista para Adicionar Item</h2>
-  <label>Usuário:</label><br>
-  <select id="userSelect" onchange="loadWishlists()">
-    <option value="">-- Selecione um usuário --</option>
-  </select><br><br>
+    <!-- Selecionar lista -->
+    <section>
+      <h2>Selecionar Lista para Adicionar Item</h2>
+      <label>Usuário:</label><br>
+      <select id="userSelect" onchange="loadWishlists()">
+        <option value="">-- Selecione um usuário --</option>
+      </select><br><br>
 
-  <label>Lista:</label><br>
-  <select id="wishlistSelect" onchange="setCurrentWishlist()">
-    <option value="">-- Selecione uma lista --</option>
-  </select>
-  
-</div>
-  <!-- Adicionar item -->
-  <div class="block">
-    <h2>3. Adicionar Item</h2>
-    <input id="itemName" placeholder="Nome do Item" /><br />
-    <input id="itemUrl" placeholder="URL do Item" /><br />
-    <button onclick="addItem()">Adicionar Item</button>
-    <pre id="itemResult"></pre>
-  </div>
+      <label>Lista:</label><br>
+      <select id="wishlistSelect" onchange="setCurrentWishlist()">
+        <option value="">-- Selecione um usuário primeiro --</option>
+      </select>
+    </section>
 
-  <!-- Ver lista completa -->
-  <div class="block">
-    <h2>4. Ver Lista Completa</h2>
-    <button onclick="getWishlist()">Mostrar Lista</button>
-    <pre id="listResult"></pre>
-  </div>
+    <!-- Adicionar item -->
+    <section>
+      <h2>3. Adicionar Item</h2>
+      <input id="itemName" placeholder="Nome do Item" /><br />
+      <input id="itemUrl" placeholder="URL do Item" /><br />
+      <button onclick="addItem()" disabled>Adicionar Item</button>
+      <pre id="itemResult"></pre>
+    </section>
+
+    <!-- Ver lista completa -->
+    <section>
+      <h2>4. Ver Lista Completa</h2>
+      <button onclick="getWishlist()">Mostrar Lista</button>
+      <pre id="listResult"></pre>
+    </section>
+  </main>
 
   <script src="app.js"></script>
 </body>
