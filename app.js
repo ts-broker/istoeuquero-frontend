@@ -72,3 +72,40 @@ async function getWishlist() {
   const data = await res.json();
   document.getElementById("listResult").innerText = JSON.stringify(data, null, 2);
 }
+
+// Carregar usuário e lista
+async function loadUsers() {
+  const users = await doFetch(`${API_URL}/users`);
+  const userSelect = document.getElementById("userSelect");
+  userSelect.innerHTML = '<option value="">-- Selecione um usuário --</option>';
+  users.forEach(u => {
+    const opt = document.createElement("option");
+    opt.value = u.id;
+    opt.textContent = u.name;
+    userSelect.appendChild(opt);
+  });
+}
+
+async function loadWishlists() {
+  const userId = document.getElementById("userSelect").value;
+  if (!userId) return;
+  const wishlists = await doFetch(`${API_URL}/users/${userId}/wishlists`);
+  const wishlistSelect = document.getElementById("wishlistSelect");
+  wishlistSelect.innerHTML = '<option value="">-- Selecione uma lista --</option>';
+  wishlists.forEach(w => {
+    const opt = document.createElement("option");
+    opt.value = w.id;
+    opt.textContent = w.title;
+    wishlistSelect.appendChild(opt);
+  });
+}
+
+function setCurrentWishlist() {
+  const wishlistId = document.getElementById("wishlistSelect").value;
+  currentWishlistId = wishlistId || null;
+}
+
+// Carregar a página
+window.onload = () => {
+  loadUsers();
+};
